@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.qf.dao.SpeakerMapper">
+  <resultMap id="BaseResultMap" type="com.qf.pojo.Speaker">
+    <id column="sid" jdbcType="INTEGER" property="id" />
+    <result column="speaker_name" jdbcType="VARCHAR" property="speakerName" />
+    <result column="speaker_job" jdbcType="VARCHAR" property="speakerJob" />
+    <result column="head_img_url" jdbcType="VARCHAR" property="headImgUrl" />
+    <result column="speaker_desc" property="speakerDesc" />
+  </resultMap>
+  <update id="update" parameterType="int">
+        UPDATE
+        speaker
+        SET
+        speaker_name = #{speakerName},
+        speaker_desc = #{speakerDesc},
+        speaker_job = #{speakerJob}
+        WHERE
+        id = #{id}
+    </update>
+    <delete id="delSpeakerById" parameterType="int">
+         delete from speaker where id = #{id}
+    </delete>
+    <select id="selectByExample" resultMap="BaseResultMap">
+    select
+    speaker.id AS sid,
+    speaker.speaker_name,
+        speaker.speaker_desc,
+        speaker.speaker_job,
+        speaker.head_img_url
+        from speaker
+  </select>
+
+
+    <insert id="addSpeaker" parameterType="int">
+        INSERT INTO `speaker`(
+        `speaker_name`,
+        `speaker_desc`,
+        `speaker_job`,
+        `head_img_url`)
+        VALUES
+        (#{speakerName},
+        #{speakerDesc},
+        #{speakerJob},
+        #{headImgUrl});
+    </insert>
+  <select id="countByExample" parameterType="com.qf.pojo.SpeakerExample" resultType="java.lang.Integer">
+    select count(*) from speaker
+  </select>
+  <select id="selectSpeakerByQueryVo" parameterType="com.qf.pojo.QueryVo" resultMap="BaseResultMap">
+   SELECT
+        speaker.id AS sid,
+        speaker.speaker_name,
+        speaker.speaker_desc,
+        speaker.speaker_job,
+        speaker.head_img_url
+        FROM
+        speaker
+        limit #{start}, #{size}
+  </select>
+  <select id="selectById" resultType="com.qf.pojo.Speaker">
+    SELECT
+        speaker.id AS sid,
+        speaker.speaker_name,
+        speaker.speaker_desc,
+        speaker.speaker_job,
+        speaker.head_img_url
+        FROM
+        speaker
+        where id = #{id}
+  </select>
+
+
+</mapper>
