@@ -12,7 +12,7 @@ import java.util.Random;
 public final class MailUtils {
 
     private static final String USER = "2649732974@qq.com"; // 发件人称号，同邮箱地址
-    private static final String PASSWORD = "omagjvwmimxlecbj"; // qq邮箱的客户端授权码（需要发短信获取）
+    private static final String PASSWORD = "**********"; // qq邮箱的客户端授权码（需要发短信获取）
 
     /**
      * @param to    收件人邮箱
